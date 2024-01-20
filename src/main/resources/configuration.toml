@@ -1,0 +1,27 @@
+[[databases]]
+wso2_db = "AM_DB"    # possible values: "AM_DB", "REG_DB"
+[databases.source]
+type = "h2"     # possible types: "h2", "mssql"
+url = "jdbc:h2:file:/Users/myuser/Documents/Backups/database/WSO2AM_DB"
+username = "wso2carbon"
+password = "wso2carbon"
+
+[databases.target]
+type = "mssql"     # possible types: "h2", "mssql"
+url = "jdbc:sqlserver://192.102.222.196:1433;databaseName=AM_DB_TEST"
+username = "root"
+password = "root"
+
+[[databases]]
+wso2_db = "REG_DB"    # possible values: "AM_DB", "REG_DB"
+[databases.source]
+type = "h2"     # possible types: "h2", "mssql"
+url = "jdbc:h2:file:/Users/myuser/Documents/Backups/database/WSO2CARBON_DB"
+username = "wso2carbon"
+password = "wso2carbon"
+
+[databases.target]
+type = "mssql"     # possible types: "h2", "mssql"
+url = "jdbc:sqlserver://192.102.222.196:1433;databaseName=REG_DB_TEST"
+username = "root"
+password = "root"
