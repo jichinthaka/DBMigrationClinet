@@ -11,7 +11,7 @@ import java.util.Map;
 
 public abstract class Migrator {
 
-    public abstract boolean run(Toml toml) throws SQLException, ClassNotFoundException;
+    public abstract void run(Toml toml) throws SQLException, ClassNotFoundException;
 
     protected void migrate(TableInfo tableInfo, DataExporter DataExporter, DataParser dataParser, ConnectionBuilder connectionBuilder, Toml toml) throws SQLException, ClassNotFoundException {
         // Access values from the TOML file
@@ -50,9 +50,7 @@ public abstract class Migrator {
                     dataParser.insertData(sourceConnection, targetConnection, tableName, table_data, tableColumns);
                 }
 
-                if (table_data != null) {
-                    table_data.close();
-                }
+                table_data.close();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

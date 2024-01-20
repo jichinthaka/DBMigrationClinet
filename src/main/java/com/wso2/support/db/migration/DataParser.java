@@ -1,7 +1,6 @@
 package com.wso2.support.db.migration;
 
 import com.wso2.support.db.migration.util.Logger;
-import jdk.nashorn.internal.ir.ReturnNode;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public abstract class DataParser {
-    public abstract boolean insertData(Connection sourceDBConnection, Connection targetDBConnection, String tableName, ResultSet sourceTableResult, List<ColumnInfo> tableColumns) throws SQLException;
+    public abstract void insertData(Connection sourceDBConnection, Connection targetDBConnection, String tableName, ResultSet sourceTableResult, List<ColumnInfo> tableColumns) throws SQLException;
     protected String buildInsertQuery(String tableName, List<ColumnInfo> tableColumns){
         String insertQuery = "INSERT INTO ";
         insertQuery = insertQuery + tableName + " ";
@@ -37,5 +36,5 @@ public abstract class DataParser {
         return insertQuery;
     }
 
-    protected abstract boolean convertData(PreparedStatement sourcePreparedStatement, ResultSet sourceTableResult, int valueID, int SourceDataType, String columnName) throws SQLException;
+    protected abstract void convertData(PreparedStatement sourcePreparedStatement, ResultSet sourceTableResult, int valueID, int SourceDataType, String columnName) throws SQLException;
 }

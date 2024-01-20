@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class MigratorH2ToMSsql extends Migrator {
     @Override
-    public boolean run(Toml toml) throws SQLException, ClassNotFoundException {
+    public void run(Toml toml) throws SQLException, ClassNotFoundException {
 
         TableInfo tableInfo = new TableInfo();
         DataExporter DataExporter = new DataExporter();
@@ -21,6 +21,5 @@ public class MigratorH2ToMSsql extends Migrator {
 
         migrate(tableInfo, DataExporter, dataParser, connectionBuilder, toml);
 
-        return true;
     }
 }

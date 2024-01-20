@@ -16,7 +16,7 @@ public class Main {
         Logger.info("***** Start the programme *****");
         Logger.info("Reading configurations from configuration.toml file...");
 
-        Toml toml = null;
+        Toml toml;
 
         // Use the class loader to get the resource stream
         try (InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("configuration.toml")) {
@@ -25,6 +25,7 @@ public class Main {
                 toml = new Toml().read(inputStream);
             } else {
                 Logger.error("Could not find the configuration.toml file.");
+                return;
             }
         } catch (Exception e) {
             e.printStackTrace();

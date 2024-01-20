@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DataParserH2ToMssql extends DataParser {
     @Override
-    public boolean insertData(Connection sourceDBConnection, Connection targetDBConnection, String tableName, ResultSet sourceTableResult, List<ColumnInfo> tableColumns) throws SQLException {
+    public void insertData(Connection sourceDBConnection, Connection targetDBConnection, String tableName, ResultSet sourceTableResult, List<ColumnInfo> tableColumns) throws SQLException {
 
         String insertQuery = buildInsertQuery(tableName, tableColumns);
         boolean isIdentity = isAutoIncrementColumn_h2(sourceDBConnection, tableName);
@@ -43,11 +43,10 @@ public class DataParserH2ToMssql extends DataParser {
             preparedStatement.close();
         }
         Logger.info("Inserted " + rowCount + " rows.");
-        return true;
     }
 
     @Override
-    protected boolean convertData(PreparedStatement sourcePreparedStatement, ResultSet sourceTableResult, int valueID, int SourceDataType, String columnName) throws SQLException {
+    protected void convertData(PreparedStatement sourcePreparedStatement, ResultSet sourceTableResult, int valueID, int SourceDataType, String columnName) throws SQLException {
         switch (SourceDataType) {
             case Types.INTEGER:
             case Types.SMALLINT:
@@ -83,16 +82,15 @@ public class DataParserH2ToMssql extends DataParser {
 
         }
 
-        return true;
     }
 
     private boolean isAutoIncrementColumn_h2(Connection connection, String tableName) throws SQLException {
         try (ResultSet rs = connection.createStatement().executeQuery("SELECT * FROM " + tableName + " WHERE 1 = 0")) {
             ResultSetMetaData metadata = rs.getMetaData();
-            int columnCount = metadata.getColumnCount();
 
             // This is the general solution, but slower
             /*
+            int columnCount = metadata.getColumnCount();
             for (int i = 1; i <= columnCount; i++) {
                 if (metadata.isAutoIncrement(i)) {
                     return true; // Found an identity column
