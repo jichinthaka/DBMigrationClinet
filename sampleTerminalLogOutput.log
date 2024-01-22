@@ -1,0 +1,280 @@
+[2024-01-22 22:05:35.194] -  INFO - ***** Start the programme *****
+[2024-01-22 22:05:35.195] -  INFO - Reading configurations from configuration.toml file...
+[2024-01-22 22:05:35.217] -  INFO - **************************************
+[2024-01-22 22:05:35.217] -  INFO - **************************************
+[2024-01-22 22:05:35.218] -  INFO - Started DB migration from H2 to MSSQL.
+[2024-01-22 22:05:35.232] -  INFO - Connecting to source H2 DB : jdbc:h2:file:/Users/user/Documents/database/WSO2AM_DB
+[2024-01-22 22:05:35.457] -  INFO - H2 connection is valid.
+[2024-01-22 22:05:35.457] -  INFO - Connecting to target MS-SQL DB : jdbc:sqlserver://108.194.6.111:1433;databaseName=AM_DB
+[2024-01-22 22:05:38.725] -  INFO - MS-SQL connection is valid.
+[2024-01-22 22:05:38.726] -  INFO - Migrating table : IDN_BASE_TABLE
+[2024-01-22 22:05:38.727] -  INFO - Inserting 1 rows...
+[2024-01-22 22:05:38.843] -  INFO - Migrating table : IDN_OAUTH_CONSUMER_APPS
+[2024-01-22 22:05:38.844] -  INFO - Inserting 2 rows...
+[2024-01-22 22:05:39.066] -  INFO - Migrating table : IDN_OAUTH1A_REQUEST_TOKEN
+[2024-01-22 22:05:39.066] -  INFO - Table is Empty.
+[2024-01-22 22:05:39.066] -  INFO - Migrating table : IDN_OAUTH1A_ACCESS_TOKEN
+[2024-01-22 22:05:39.066] -  INFO - Table is Empty.
+[2024-01-22 22:05:39.067] -  INFO - Migrating table : IDN_OAUTH2_ACCESS_TOKEN
+[2024-01-22 22:05:39.067] -  INFO - Inserting 5 rows...
+[2024-01-22 22:05:39.550] -  INFO - Migrating table : IDN_OAUTH2_AUTHORIZATION_CODE
+[2024-01-22 22:05:39.551] -  INFO - Table is Empty.
+[2024-01-22 22:05:39.551] -  INFO - Migrating table : IDN_OAUTH2_ACCESS_TOKEN_SCOPE
+[2024-01-22 22:05:39.551] -  INFO - Inserting 9 rows...
+[2024-01-22 22:05:40.261] -  INFO - Migrating table : IDN_OAUTH2_SCOPE
+[2024-01-22 22:05:40.263] -  INFO - Table is Empty.
+[2024-01-22 22:05:40.263] -  INFO - Migrating table : IDN_OAUTH2_RESOURCE_SCOPE
+[2024-01-22 22:05:40.263] -  INFO - Table is Empty.
+[2024-01-22 22:05:40.263] -  INFO - Migrating table : IDN_SCIM_GROUP
+[2024-01-22 22:05:40.264] -  INFO - Table is Empty.
+[2024-01-22 22:05:40.264] -  INFO - Migrating table : IDN_OPENID_REMEMBER_ME
+[2024-01-22 22:05:40.264] -  INFO - Table is Empty.
+[2024-01-22 22:05:40.264] -  INFO - Migrating table : IDN_OPENID_USER_RPS
+[2024-01-22 22:05:40.264] -  INFO - Table is Empty.
+[2024-01-22 22:05:40.264] -  INFO - Migrating table : IDN_OPENID_ASSOCIATIONS
+[2024-01-22 22:05:40.265] -  INFO - Table is Empty.
+[2024-01-22 22:05:40.265] -  INFO - Migrating table : IDN_STS_STORE
+[2024-01-22 22:05:40.265] -  INFO - Table is Empty.
+[2024-01-22 22:05:40.265] -  INFO - Migrating table : IDN_IDENTITY_USER_DATA
+[2024-01-22 22:05:40.265] -  INFO - Table is Empty.
+[2024-01-22 22:05:40.265] -  INFO - Migrating table : IDN_IDENTITY_META_DATA
+[2024-01-22 22:05:40.265] -  INFO - Table is Empty.
+[2024-01-22 22:05:40.265] -  INFO - Migrating table : IDN_THRIFT_SESSION
+[2024-01-22 22:05:40.266] -  INFO - Inserting 2 rows...
+[2024-01-22 22:05:40.422] -  INFO - Migrating table : IDN_AUTH_SESSION_STORE
+[2024-01-22 22:05:40.424] -  INFO - Table is Empty.
+[2024-01-22 22:05:40.424] -  INFO - Migrating table : SP_APP
+[2024-01-22 22:05:40.424] -  INFO - Inserting 2 rows...
+[2024-01-22 22:05:40.658] -  INFO - Migrating table : SP_METADATA
+[2024-01-22 22:05:40.661] -  INFO - Inserting 2 rows...
+[2024-01-22 22:05:40.835] -  INFO - Migrating table : SP_INBOUND_AUTH
+[2024-01-22 22:05:40.835] -  INFO - Inserting 2 rows...
+[2024-01-22 22:05:41.036] -  INFO - Migrating table : SP_AUTH_STEP
+[2024-01-22 22:05:41.037] -  INFO - Table is Empty.
+[2024-01-22 22:05:41.037] -  INFO - Migrating table : SP_FEDERATED_IDP
+[2024-01-22 22:05:41.037] -  INFO - Table is Empty.
+[2024-01-22 22:05:41.037] -  INFO - Migrating table : SP_CLAIM_MAPPING
+[2024-01-22 22:05:41.038] -  INFO - Table is Empty.
+[2024-01-22 22:05:41.038] -  INFO - Migrating table : SP_ROLE_MAPPING
+[2024-01-22 22:05:41.038] -  INFO - Table is Empty.
+[2024-01-22 22:05:41.038] -  INFO - Migrating table : SP_REQ_PATH_AUTHENTICATOR
+[2024-01-22 22:05:41.038] -  INFO - Table is Empty.
+[2024-01-22 22:05:41.039] -  INFO - Migrating table : SP_PROVISIONING_CONNECTOR
+[2024-01-22 22:05:41.039] -  INFO - Table is Empty.
+[2024-01-22 22:05:41.039] -  INFO - Migrating table : IDP
+[2024-01-22 22:05:41.039] -  INFO - Inserting 1 rows...
+[2024-01-22 22:05:41.159] -  INFO - Migrating table : IDP_ROLE
+[2024-01-22 22:05:41.159] -  INFO - Table is Empty.
+[2024-01-22 22:05:41.159] -  INFO - Migrating table : IDP_ROLE_MAPPING
+[2024-01-22 22:05:41.160] -  INFO - Table is Empty.
+[2024-01-22 22:05:41.160] -  INFO - Migrating table : IDP_CLAIM
+[2024-01-22 22:05:41.160] -  INFO - Table is Empty.
+[2024-01-22 22:05:41.160] -  INFO - Migrating table : IDP_CLAIM_MAPPING
+[2024-01-22 22:05:41.160] -  INFO - Table is Empty.
+[2024-01-22 22:05:41.161] -  INFO - Migrating table : IDP_AUTHENTICATOR
+[2024-01-22 22:05:41.161] -  INFO - Inserting 4 rows...
+[2024-01-22 22:05:41.549] -  INFO - Migrating table : IDP_METADATA
+[2024-01-22 22:05:41.549] -  INFO - Inserting 2 rows...
+[2024-01-22 22:05:41.739] -  INFO - Migrating table : IDP_AUTHENTICATOR_PROPERTY
+[2024-01-22 22:05:41.739] -  INFO - Inserting 6 rows...
+[2024-01-22 22:05:42.260] -  INFO - Migrating table : IDP_PROVISIONING_CONFIG
+[2024-01-22 22:05:42.261] -  INFO - Table is Empty.
+[2024-01-22 22:05:42.261] -  INFO - Migrating table : IDP_PROV_CONFIG_PROPERTY
+[2024-01-22 22:05:42.262] -  INFO - Table is Empty.
+[2024-01-22 22:05:42.262] -  INFO - Migrating table : IDP_PROVISIONING_ENTITY
+[2024-01-22 22:05:42.262] -  INFO - Table is Empty.
+[2024-01-22 22:05:42.263] -  INFO - Migrating table : IDP_LOCAL_CLAIM
+[2024-01-22 22:05:42.263] -  INFO - Table is Empty.
+[2024-01-22 22:05:42.263] -  INFO - Migrating table : IDN_ASSOCIATED_ID
+[2024-01-22 22:05:42.263] -  INFO - Table is Empty.
+[2024-01-22 22:05:42.263] -  INFO - Migrating table : IDN_USER_ACCOUNT_ASSOCIATION
+[2024-01-22 22:05:42.264] -  INFO - Table is Empty.
+[2024-01-22 22:05:42.264] -  INFO - Migrating table : FIDO_DEVICE_STORE
+[2024-01-22 22:05:42.264] -  INFO - Table is Empty.
+[2024-01-22 22:05:42.264] -  INFO - Migrating table : WF_REQUEST
+[2024-01-22 22:05:42.264] -  INFO - Table is Empty.
+[2024-01-22 22:05:42.265] -  INFO - Migrating table : WF_BPS_PROFILE
+[2024-01-22 22:05:42.265] -  INFO - Table is Empty.
+[2024-01-22 22:05:42.265] -  INFO - Migrating table : WF_WORKFLOW
+[2024-01-22 22:05:42.265] -  INFO - Table is Empty.
+[2024-01-22 22:05:42.265] -  INFO - Migrating table : WF_WORKFLOW_ASSOCIATION
+[2024-01-22 22:05:42.265] -  INFO - Table is Empty.
+[2024-01-22 22:05:42.266] -  INFO - Migrating table : WF_WORKFLOW_CONFIG_PARAM
+[2024-01-22 22:05:42.266] -  INFO - Table is Empty.
+[2024-01-22 22:05:42.266] -  INFO - Migrating table : WF_REQUEST_ENTITY_RELATIONSHIP
+[2024-01-22 22:05:42.266] -  INFO - Table is Empty.
+[2024-01-22 22:05:42.266] -  INFO - Migrating table : WF_WORKFLOW_REQUEST_RELATION
+[2024-01-22 22:05:42.267] -  INFO - Table is Empty.
+[2024-01-22 22:05:42.267] -  INFO - Migrating table : IDN_RECOVERY_DATA
+[2024-01-22 22:05:42.267] -  INFO - Table is Empty.
+[2024-01-22 22:05:42.267] -  INFO - Migrating table : IDN_PASSWORD_HISTORY_DATA
+[2024-01-22 22:05:42.268] -  INFO - Table is Empty.
+[2024-01-22 22:05:42.268] -  INFO - Migrating table : IDN_CLAIM_DIALECT
+[2024-01-22 22:05:42.268] -  INFO - Inserting 9 rows...
+[2024-01-22 22:05:43.236] -  INFO - Migrating table : IDN_CLAIM
+[2024-01-22 22:05:43.243] -  INFO - Inserting 236 rows...
+[2024-01-22 22:06:04.649] -  INFO - Migrating table : IDN_CLAIM_MAPPED_ATTRIBUTE
+[2024-01-22 22:06:04.652] -  INFO - Inserting 78 rows...
+[2024-01-22 22:06:13.526] -  INFO - Migrating table : IDN_CLAIM_PROPERTY
+[2024-01-22 22:06:13.531] -  INFO - Inserting 186 rows...
+[2024-01-22 22:06:29.688] -  INFO - Migrating table : IDN_CLAIM_MAPPING
+[2024-01-22 22:06:29.691] -  INFO - Inserting 158 rows...
+[2024-01-22 22:06:45.802] -  INFO - Migrating table : IDN_SAML2_ASSERTION_STORE
+[2024-01-22 22:06:45.806] -  INFO - Table is Empty.
+[2024-01-22 22:06:45.806] -  INFO - Migrating table : AM_SUBSCRIBER
+[2024-01-22 22:06:45.807] -  INFO - Inserting 1 rows...
+[2024-01-22 22:06:45.911] -  INFO - Migrating table : AM_APPLICATION
+[2024-01-22 22:06:45.912] -  INFO - Inserting 2 rows...
+[2024-01-22 22:06:46.093] -  INFO - Migrating table : AM_API
+[2024-01-22 22:06:46.097] -  INFO - Inserting 2 rows...
+[2024-01-22 22:06:46.292] -  INFO - Migrating table : AM_API_URL_MAPPING
+[2024-01-22 22:06:46.292] -  INFO - Inserting 10 rows...
+[2024-01-22 22:06:47.133] -  INFO - Migrating table : AM_SUBSCRIPTION
+[2024-01-22 22:06:47.134] -  INFO - Inserting 2 rows...
+[2024-01-22 22:06:47.317] -  INFO - Migrating table : AM_SUBSCRIPTION_KEY_MAPPING
+[2024-01-22 22:06:47.318] -  INFO - Table is Empty.
+[2024-01-22 22:06:47.318] -  INFO - Migrating table : AM_APPLICATION_KEY_MAPPING
+[2024-01-22 22:06:47.318] -  INFO - Inserting 2 rows...
+[2024-01-22 22:06:47.483] -  INFO - Migrating table : AM_API_LC_EVENT
+[2024-01-22 22:06:47.484] -  INFO - Inserting 4 rows...
+[2024-01-22 22:06:47.852] -  INFO - Migrating table : AM_APP_KEY_DOMAIN_MAPPING
+[2024-01-22 22:06:47.854] -  INFO - Table is Empty.
+[2024-01-22 22:06:47.854] -  INFO - Migrating table : AM_API_COMMENTS
+[2024-01-22 22:06:47.854] -  INFO - Table is Empty.
+[2024-01-22 22:06:47.854] -  INFO - Migrating table : AM_API_RATINGS
+[2024-01-22 22:06:47.855] -  INFO - Table is Empty.
+[2024-01-22 22:06:47.855] -  INFO - Migrating table : AM_TIER_PERMISSIONS
+[2024-01-22 22:06:47.855] -  INFO - Table is Empty.
+[2024-01-22 22:06:47.855] -  INFO - Migrating table : AM_EXTERNAL_STORES
+[2024-01-22 22:06:47.856] -  INFO - Table is Empty.
+[2024-01-22 22:06:47.856] -  INFO - Migrating table : AM_WORKFLOWS
+[2024-01-22 22:06:47.856] -  INFO - Table is Empty.
+[2024-01-22 22:06:47.856] -  INFO - Migrating table : AM_APPLICATION_REGISTRATION
+[2024-01-22 22:06:47.856] -  INFO - Inserting 2 rows...
+[2024-01-22 22:06:48.179] -  INFO - Migrating table : AM_API_SCOPES
+[2024-01-22 22:06:48.181] -  INFO - Table is Empty.
+[2024-01-22 22:06:48.181] -  INFO - Migrating table : AM_API_DEFAULT_VERSION
+[2024-01-22 22:06:48.181] -  INFO - Table is Empty.
+[2024-01-22 22:06:48.181] -  INFO - Migrating table : AM_ALERT_TYPES
+[2024-01-22 22:06:48.182] -  INFO - Inserting 9 rows...
+[2024-01-22 22:06:48.924] -  INFO - Migrating table : AM_ALERT_TYPES_VALUES
+[2024-01-22 22:06:48.925] -  INFO - Table is Empty.
+[2024-01-22 22:06:48.926] -  INFO - Migrating table : AM_ALERT_EMAILLIST
+[2024-01-22 22:06:48.926] -  INFO - Table is Empty.
+[2024-01-22 22:06:48.926] -  INFO - Migrating table : AM_ALERT_EMAILLIST_DETAILS
+[2024-01-22 22:06:48.927] -  INFO - Table is Empty.
+[2024-01-22 22:06:48.927] -  INFO - Migrating table : AM_POLICY_SUBSCRIPTION
+[2024-01-22 22:06:48.928] -  INFO - Inserting 5 rows...
+[2024-01-22 22:06:49.365] -  INFO - Migrating table : AM_POLICY_APPLICATION
+[2024-01-22 22:06:49.367] -  INFO - Inserting 4 rows...
+[2024-01-22 22:06:50.019] -  INFO - Migrating table : AM_POLICY_HARD_THROTTLING
+[2024-01-22 22:06:50.026] -  INFO - Table is Empty.
+[2024-01-22 22:06:50.026] -  INFO - Migrating table : AM_API_THROTTLE_POLICY
+[2024-01-22 22:06:50.026] -  INFO - Inserting 4 rows...
+[2024-01-22 22:06:50.413] -  INFO - Migrating table : AM_CONDITION_GROUP
+[2024-01-22 22:06:50.415] -  INFO - Table is Empty.
+[2024-01-22 22:06:50.415] -  INFO - Migrating table : AM_QUERY_PARAMETER_CONDITION
+[2024-01-22 22:06:50.415] -  INFO - Table is Empty.
+[2024-01-22 22:06:50.415] -  INFO - Migrating table : AM_HEADER_FIELD_CONDITION
+[2024-01-22 22:06:50.415] -  INFO - Table is Empty.
+[2024-01-22 22:06:50.415] -  INFO - Migrating table : AM_JWT_CLAIM_CONDITION
+[2024-01-22 22:06:50.415] -  INFO - Table is Empty.
+[2024-01-22 22:06:50.415] -  INFO - Migrating table : AM_IP_CONDITION
+[2024-01-22 22:06:50.416] -  INFO - Table is Empty.
+[2024-01-22 22:06:50.416] -  INFO - Migrating table : AM_POLICY_GLOBAL
+[2024-01-22 22:06:50.416] -  INFO - Table is Empty.
+[2024-01-22 22:06:50.416] -  INFO - Migrating table : AM_THROTTLE_TIER_PERMISSIONS
+[2024-01-22 22:06:50.416] -  INFO - Table is Empty.
+[2024-01-22 22:06:50.416] -  INFO - Migrating table : AM_BLOCK_CONDITIONS
+[2024-01-22 22:06:50.416] -  INFO - Table is Empty.
+[2024-01-22 22:06:50.417] -  INFO - Finished DB migration.
+[2024-01-22 22:06:50.417] -  INFO - **************************************
+[2024-01-22 22:06:50.417] -  INFO - **************************************
+[2024-01-22 22:06:50.418] -  INFO - **************************************
+[2024-01-22 22:06:50.418] -  INFO - **************************************
+[2024-01-22 22:06:50.418] -  INFO - Started DB migration from H2 to MSSQL.
+[2024-01-22 22:06:50.418] -  INFO - Connecting to source H2 DB : jdbc:h2:file:/Users/jichinthaka/Documents/WSO2_tickets/Common/BSLAMCSUB-289/0-Test/wso2am-2.1.0/0-Backups/3--afterCreatingAPIinvocation/database/WSO2CARBON_DB
+[2024-01-22 22:06:50.488] -  INFO - H2 connection is valid.
+[2024-01-22 22:06:50.489] -  INFO - Connecting to target MS-SQL DB : jdbc:sqlserver://4.194.155.141:1433;databaseName=REG_DB
+[2024-01-22 22:06:51.053] -  INFO - MS-SQL connection is valid.
+[2024-01-22 22:06:51.139] -  INFO - Migrating table : REG_CLUSTER_LOCK
+[2024-01-22 22:06:51.140] -  INFO - Table is Empty.
+[2024-01-22 22:06:51.140] -  INFO - Migrating table : REG_LOG
+[2024-01-22 22:06:51.155] -  INFO - Inserting 609 rows...
+[2024-01-22 22:07:54.984] -  INFO - Migrating table : REG_PATH
+[2024-01-22 22:07:55.002] -  INFO - Inserting 328 rows...
+[2024-01-22 22:08:26.725] -  INFO - Migrating table : REG_CONTENT
+[2024-01-22 22:08:26.727] -  INFO - Inserting 82 rows...
+[2024-01-22 22:08:39.545] -  INFO - Migrating table : REG_CONTENT_HISTORY
+[2024-01-22 22:08:39.547] -  INFO - Table is Empty.
+[2024-01-22 22:08:39.548] -  INFO - Migrating table : REG_RESOURCE
+[2024-01-22 22:08:39.557] -  INFO - Inserting 409 rows...
+[2024-01-22 22:09:17.488] -  INFO - Migrating table : REG_RESOURCE_HISTORY
+[2024-01-22 22:09:17.493] -  INFO - Table is Empty.
+[2024-01-22 22:09:17.493] -  INFO - Migrating table : REG_COMMENT
+[2024-01-22 22:09:17.494] -  INFO - Table is Empty.
+[2024-01-22 22:09:17.494] -  INFO - Migrating table : REG_RESOURCE_COMMENT
+[2024-01-22 22:09:17.494] -  INFO - Table is Empty.
+[2024-01-22 22:09:17.494] -  INFO - Migrating table : REG_RATING
+[2024-01-22 22:09:17.494] -  INFO - Table is Empty.
+[2024-01-22 22:09:17.494] -  INFO - Migrating table : REG_RESOURCE_RATING
+[2024-01-22 22:09:17.495] -  INFO - Table is Empty.
+[2024-01-22 22:09:17.495] -  INFO - Migrating table : REG_TAG
+[2024-01-22 22:09:17.496] -  INFO - Inserting 14 rows...
+[2024-01-22 22:09:18.728] -  INFO - Migrating table : REG_RESOURCE_TAG
+[2024-01-22 22:09:18.730] -  INFO - Inserting 14 rows...
+[2024-01-22 22:09:22.128] -  INFO - Migrating table : REG_PROPERTY
+[2024-01-22 22:09:22.140] -  INFO - Inserting 1606 rows...
+[2024-01-22 22:11:59.865] -  INFO - Migrating table : REG_RESOURCE_PROPERTY
+[2024-01-22 22:11:59.886] -  INFO - Inserting 1606 rows...
+[2024-01-22 22:14:33.555] -  INFO - Migrating table : REG_ASSOCIATION
+[2024-01-22 22:14:33.560] -  INFO - Inserting 4 rows...
+[2024-01-22 22:14:34.024] -  INFO - Migrating table : REG_SNAPSHOT
+[2024-01-22 22:14:34.025] -  INFO - Table is Empty.
+[2024-01-22 22:14:34.025] -  INFO - Migrating table : UM_TENANT
+[2024-01-22 22:14:34.025] -  INFO - Table is Empty.
+[2024-01-22 22:14:34.025] -  INFO - Migrating table : UM_DOMAIN
+[2024-01-22 22:14:34.025] -  INFO - Inserting 5 rows...
+[2024-01-22 22:14:34.675] -  INFO - Migrating table : UM_USER
+[2024-01-22 22:14:34.678] -  INFO - Inserting 1 rows...
+[2024-01-22 22:14:34.824] -  INFO - Migrating table : UM_SYSTEM_USER
+[2024-01-22 22:14:34.826] -  INFO - Inserting 1 rows...
+[2024-01-22 22:14:35.283] -  INFO - Migrating table : UM_USER_ATTRIBUTE
+[2024-01-22 22:14:35.293] -  INFO - Table is Empty.
+[2024-01-22 22:14:35.294] -  INFO - Migrating table : UM_ROLE
+[2024-01-22 22:14:35.311] -  INFO - Inserting 1 rows...
+[2024-01-22 22:14:35.444] -  INFO - Migrating table : UM_MODULE
+[2024-01-22 22:14:35.444] -  INFO - Table is Empty.
+[2024-01-22 22:14:35.446] -  INFO - Migrating table : UM_MODULE_ACTIONS
+[2024-01-22 22:14:35.446] -  INFO - Table is Empty.
+[2024-01-22 22:14:35.446] -  INFO - Migrating table : UM_PERMISSION
+[2024-01-22 22:14:35.462] -  INFO - Inserting 59 rows...
+[2024-01-22 22:14:42.998] -  INFO - Migrating table : UM_ROLE_PERMISSION
+[2024-01-22 22:14:43.000] -  INFO - Inserting 77 rows...
+[2024-01-22 22:14:55.169] -  INFO - Migrating table : UM_USER_PERMISSION
+[2024-01-22 22:14:55.171] -  INFO - Table is Empty.
+[2024-01-22 22:14:55.171] -  INFO - Migrating table : UM_USER_ROLE
+[2024-01-22 22:14:55.171] -  INFO - Inserting 1 rows...
+[2024-01-22 22:14:55.302] -  INFO - Migrating table : UM_SHARED_USER_ROLE
+[2024-01-22 22:14:55.302] -  INFO - Table is Empty.
+[2024-01-22 22:14:55.302] -  INFO - Migrating table : UM_ACCOUNT_MAPPING
+[2024-01-22 22:14:55.302] -  INFO - Table is Empty.
+[2024-01-22 22:14:55.302] -  INFO - Migrating table : UM_DIALECT
+[2024-01-22 22:14:55.302] -  INFO - Table is Empty.
+[2024-01-22 22:14:55.302] -  INFO - Migrating table : UM_CLAIM
+[2024-01-22 22:14:55.302] -  INFO - Table is Empty.
+[2024-01-22 22:14:55.302] -  INFO - Migrating table : UM_PROFILE_CONFIG
+[2024-01-22 22:14:55.303] -  INFO - Table is Empty.
+[2024-01-22 22:14:55.303] -  INFO - Migrating table : UM_HYBRID_ROLE
+[2024-01-22 22:14:55.303] -  INFO - Inserting 6 rows...
+[2024-01-22 22:14:55.828] -  INFO - Migrating table : UM_HYBRID_USER_ROLE
+[2024-01-22 22:14:55.829] -  INFO - Inserting 5 rows...
+[2024-01-22 22:14:56.288] -  INFO - Migrating table : UM_HYBRID_REMEMBER_ME
+[2024-01-22 22:14:56.289] -  INFO - Table is Empty.
+[2024-01-22 22:14:56.290] -  INFO - Migrating table : UM_SYSTEM_ROLE
+[2024-01-22 22:14:56.291] -  INFO - Inserting 1 rows...
+[2024-01-22 22:14:56.412] -  INFO - Migrating table : UM_SYSTEM_USER_ROLE
+[2024-01-22 22:14:56.413] -  INFO - Inserting 1 rows...
+[2024-01-22 22:14:56.608] -  INFO - Finished DB migration.
+[2024-01-22 22:14:56.608] -  INFO - **************************************
+[2024-01-22 22:14:56.609] -  INFO - **************************************
