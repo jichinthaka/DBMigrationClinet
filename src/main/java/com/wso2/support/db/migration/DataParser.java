@@ -32,7 +32,7 @@ public abstract class DataParser {
         valueLocations = valueLocations + ")";
         insertQuery = insertQuery + columnNames + " values" + valueLocations + ";";
 
-        Logger.info("Insert Query : " + insertQuery);
+//        Logger.info("Insert Query : " + insertQuery);
         return insertQuery;
     }
 

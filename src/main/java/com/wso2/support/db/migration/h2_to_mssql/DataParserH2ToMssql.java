@@ -42,7 +42,7 @@ public class DataParserH2ToMssql extends DataParser {
         if (preparedStatement != null) {
             preparedStatement.close();
         }
-        Logger.info("Inserted " + rowCount + " rows.");
+//        Logger.info("Inserted " + rowCount + " rows.");
     }
 
     @Override
