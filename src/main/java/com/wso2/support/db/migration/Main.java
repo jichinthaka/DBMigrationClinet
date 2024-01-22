@@ -4,6 +4,8 @@ import com.moandjiezana.toml.Toml;
 import com.wso2.support.db.migration.h2_to_mssql.MigratorH2ToMSsql;
 import com.wso2.support.db.migration.util.Logger;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
@@ -19,7 +21,8 @@ public class Main {
         Toml toml;
 
         // Use the class loader to get the resource stream
-        try (InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("configuration.toml")) {
+//        try (InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("configuration.toml")) {
+            try (InputStream inputStream = new FileInputStream(new File("./configuration.toml"))) {
             if (inputStream != null) {
                 // Read and parse the TOML file
                 toml = new Toml().read(inputStream);
