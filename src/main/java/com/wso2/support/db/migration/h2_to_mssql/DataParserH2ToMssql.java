@@ -26,6 +26,7 @@ public class DataParserH2ToMssql extends DataParser {
 
         int rowCount = 0;
         while (sourceTableResult.next()) {
+            rowCount += 1;
             for (int i = 0; i < tableColumns.size(); i++) {
                 ColumnInfo columnInfo = tableColumns.get(i);
                 String columnName = columnInfo.getColumnName();
@@ -36,8 +37,13 @@ public class DataParserH2ToMssql extends DataParser {
                 convertData(preparedStatement, sourceTableResult, i + 1, dataType, columnName);
             }
 //            System.out.println(preparedStatement);
-            preparedStatement.executeUpdate();
-            rowCount += 1;
+            try {
+                preparedStatement.executeUpdate();
+            }
+            catch (SQLException e) {
+                Logger.error(e.toString());
+                Logger.info("Continue to insert other rows...");
+            }
         }
         if (preparedStatement != null) {
             preparedStatement.close();

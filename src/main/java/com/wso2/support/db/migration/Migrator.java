@@ -62,6 +62,8 @@ public abstract class Migrator {
                 table_data.close();
             }
         } catch (SQLException e) {
+            sourceConnection.close();
+            targetConnection.close();
             throw new RuntimeException(e);
         }
 
@@ -74,5 +76,9 @@ public abstract class Migrator {
             PreparedStatement enableConstraintStatement = targetConnection.prepareStatement(enableConstraintSql);
             enableConstraintStatement.executeUpdate();
         }
+
+
+        sourceConnection.close();
+        targetConnection.close();
     }
 }
