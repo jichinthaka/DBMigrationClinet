@@ -10,7 +10,7 @@
 > 1. Download the Source
 > 2. run `mvn clean install`
 
-### How run the Program?
+### How to run the Program?
  1. Configure the `configuration.toml`
 
 Sample `configuration.toml` : 
@@ -51,7 +51,13 @@ Here, there are two database migration.
 
  3. Execute the jar file. 
  
- `java -jar DBMigrationClinet-1.0-SNAPSHOT.jar`
- 
+ `java -jar DBMigrationClinet-1.0-SNAPSHOT-jar-with-dependencies.jar 2>&1 | tee migrationlogs.log`
+
+This command will save the output logs of the program to the file  `migrationlogs.log` in the same directory. 
+
+
 ## Extendability
 For now, this application is written for the Database migration from H2 to MSSQL. But this is extendable for other DB types. 
+Refer this blog [1] for more details. 
+
+[1] - https://medium.com/@jayaweerage.imesh/how-to-migrate-wso2-apim-default-h2-database-data-eebd0d9f5eb7
