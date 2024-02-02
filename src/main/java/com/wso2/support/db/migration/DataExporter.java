@@ -9,10 +9,13 @@ import java.sql.Statement;
 
 public class DataExporter {
 
-    public ResultSet exportFromTable(Connection dbConnection, String tableName) throws SQLException {
-        Statement sqlStmt = dbConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        //Logger.info("Reading data from source table..");
-        ResultSet results = sqlStmt.executeQuery("SELECT * FROM " + tableName);
+    public ResultSet exportFromTable(Connection dbConnection, String tableName) {
+        ResultSet results = null;
+
+        try {
+            Statement sqlStmt = dbConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            //Logger.info("Reading data from source table..");
+            results = sqlStmt.executeQuery("SELECT * FROM " + tableName);
 
 //        String query = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'PUBLIC'";
 //        String query = "show tables;";
@@ -27,6 +30,12 @@ public class DataExporter {
 //                System.out.println(tableName_temp);
 //            }
 //        }
+        }
+        catch (SQLException e) {
+            Logger.error(e.toString());
+            Logger.error("Error while exporting data from source table.");
+            return null;
+        }
 
 
         return results;

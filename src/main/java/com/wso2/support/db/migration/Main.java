@@ -58,10 +58,16 @@ public class Main {
                 Logger.error("Only H2 to MSSQL migration is implemented.");
             }
 
-            migrator.run(databaseToml);
-            Logger.info("Finished DB migration.");
-            Logger.info("**************************************");
-            Logger.info("**************************************");
+            if(!migrator.run(databaseToml)) {
+                Logger.error("Finished DB migration with Errors.");
+                Logger.info("**************************************");
+                Logger.info("**************************************");
+            }
+            else {
+                Logger.info("Finished DB migration.");
+                Logger.info("**************************************");
+                Logger.info("**************************************");
+            }
         }
 
     }

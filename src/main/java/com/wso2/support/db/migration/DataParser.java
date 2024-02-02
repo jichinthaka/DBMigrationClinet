@@ -1,7 +1,5 @@
 package com.wso2.support.db.migration;
 
-import com.wso2.support.db.migration.util.Logger;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public abstract class DataParser {
-    public abstract void insertData(Connection sourceDBConnection, Connection targetDBConnection, String tableName, ResultSet sourceTableResult, List<ColumnInfo> tableColumns) throws SQLException;
+    public abstract boolean insertData(Connection sourceDBConnection, Connection targetDBConnection, String tableName, ResultSet sourceTableResult, List<ColumnInfo> tableColumns) throws SQLException;
     protected String buildInsertQuery(String tableName, List<ColumnInfo> tableColumns){
         String insertQuery = "INSERT INTO ";
         insertQuery = insertQuery + tableName + " ";

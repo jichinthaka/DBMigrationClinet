@@ -9,46 +9,52 @@ import java.util.List;
 
 public class DataParserH2ToMssql extends DataParser {
     @Override
-    public void insertData(Connection sourceDBConnection, Connection targetDBConnection, String tableName, ResultSet sourceTableResult, List<ColumnInfo> tableColumns) throws SQLException {
+    public boolean insertData(Connection sourceDBConnection, Connection targetDBConnection, String tableName, ResultSet sourceTableResult, List<ColumnInfo> tableColumns) {
+        try {
+            String insertQuery = buildInsertQuery(tableName, tableColumns);
+            boolean isIdentity = isAutoIncrementColumn_h2(sourceDBConnection, tableName);
 
-        String insertQuery = buildInsertQuery(tableName, tableColumns);
-        boolean isIdentity = isAutoIncrementColumn_h2(sourceDBConnection, tableName);
-
-        if (isIdentity) {
+            if (isIdentity) {
 //            Logger.info("This is a table with Identity column in MSSQL.");
-            insertQuery = "SET IDENTITY_INSERT " + tableName + " ON; " + insertQuery + " SET IDENTITY_INSERT " + tableName + " OFF;";
-        }
+                insertQuery = "SET IDENTITY_INSERT " + tableName + " ON; " + insertQuery + " SET IDENTITY_INSERT " + tableName + " OFF;";
+            }
 
 //        System.out.println("isIdentity : " + isIdentity);
 //        System.out.println("insertQuery : " + insertQuery);
 
-        PreparedStatement preparedStatement = targetDBConnection.prepareStatement(insertQuery);
+            PreparedStatement preparedStatement = targetDBConnection.prepareStatement(insertQuery);
 
-        int rowCount = 0;
-        while (sourceTableResult.next()) {
-            rowCount += 1;
-            for (int i = 0; i < tableColumns.size(); i++) {
-                ColumnInfo columnInfo = tableColumns.get(i);
-                String columnName = columnInfo.getColumnName();
-                int dataType = columnInfo.getDataType();
+            int rowCount = 0;
+            while (sourceTableResult.next()) {
+                rowCount += 1;
+                for (int i = 0; i < tableColumns.size(); i++) {
+                    ColumnInfo columnInfo = tableColumns.get(i);
+                    String columnName = columnInfo.getColumnName();
+                    int dataType = columnInfo.getDataType();
 
 //                System.out.println("dataType : " + dataType + ", columnName : " + columnName + ", h2_table_data_result : " + sourceTableResult.getString(columnName));
 
-                convertData(preparedStatement, sourceTableResult, i + 1, dataType, columnName);
-            }
+                    convertData(preparedStatement, sourceTableResult, i + 1, dataType, columnName);
+                }
 //            System.out.println(preparedStatement);
-            try {
-                preparedStatement.executeUpdate();
+                try {
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    Logger.error(e.toString());
+                    Logger.info("Continue to insert other rows...");
+                }
             }
-            catch (SQLException e) {
-                Logger.error(e.toString());
-                Logger.info("Continue to insert other rows...");
+            if (preparedStatement != null) {
+                preparedStatement.close();
             }
-        }
-        if (preparedStatement != null) {
-            preparedStatement.close();
-        }
 //        Logger.info("Inserted " + rowCount + " rows.");
+        }
+        catch (SQLException e) {
+            Logger.error(e.toString());
+            Logger.error("Error while inserting data to target table.");
+            return false;
+        }
+        return true;
     }
 
     @Override

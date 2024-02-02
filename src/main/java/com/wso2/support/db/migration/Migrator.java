@@ -12,9 +12,9 @@ import java.util.Map;
 
 public abstract class Migrator {
 
-    public abstract void run(Toml toml) throws SQLException, ClassNotFoundException;
+    public abstract boolean run(Toml toml) throws ClassNotFoundException, SQLException;
 
-    protected void migrate(TableInfo tableInfo, DataExporter DataExporter, DataParser dataParser, ConnectionBuilder connectionBuilder, Toml toml) throws SQLException, ClassNotFoundException {
+    protected boolean migrate(TableInfo tableInfo, DataExporter DataExporter, DataParser dataParser, ConnectionBuilder connectionBuilder, Toml toml) throws ClassNotFoundException, SQLException {
         // Access values from the TOML file
 
         String wso2_db = toml.getString("wso2_db");
@@ -30,16 +30,15 @@ public abstract class Migrator {
         Connection sourceConnection = connectionBuilder.getSourceConnection(sourceUrl, sourceUsername, sourcePassword );
         Connection targetConnection = connectionBuilder.getTargetConnection(targetUrl, targetUsername, targetPassword);
 
-        // hard coded
-        if(wso2_db.equalsIgnoreCase("REG_DB"))
-        {
-            String disableConstraintSql = "ALTER TABLE REG_RESOURCE_TAG NOCHECK CONSTRAINT REG_RESOURCE_TAG_FK_BY_PATH_ID;"
-                    + "ALTER TABLE REG_RESOURCE_PROPERTY NOCHECK CONSTRAINT REG_RESOURCE_PROPERTY_FK_BY_PATH_ID;";
-            PreparedStatement disableConstraintStatement = targetConnection.prepareStatement(disableConstraintSql);
-            disableConstraintStatement.executeUpdate();
-        }
-
         try {
+            // hard coded
+            if (wso2_db.equalsIgnoreCase("REG_DB")) {
+                String disableConstraintSql = "ALTER TABLE REG_RESOURCE_TAG NOCHECK CONSTRAINT REG_RESOURCE_TAG_FK_BY_PATH_ID;"
+                        + "ALTER TABLE REG_RESOURCE_PROPERTY NOCHECK CONSTRAINT REG_RESOURCE_PROPERTY_FK_BY_PATH_ID;";
+                PreparedStatement disableConstraintStatement = targetConnection.prepareStatement(disableConstraintSql);
+                disableConstraintStatement.executeUpdate();
+            }
+
             // Iterate over the tableInfo map
             for (Map.Entry<String, List<ColumnInfo>> entry : tableInfo.getTableInfo(wso2_db).entrySet()) {
                 String tableName = entry.getKey();
@@ -48,6 +47,12 @@ public abstract class Migrator {
                 Logger.info("Migrating table : " + tableName);
 
                 ResultSet table_data = DataExporter.exportFromTable(sourceConnection, tableName);
+
+                if (table_data == null) {
+                    Logger.info("Continue to next table...");
+                    continue;
+                }
+
                 table_data.last();
                 int rowCount = table_data.getRow();
 
@@ -56,29 +61,38 @@ public abstract class Migrator {
                 } else {
                     table_data.beforeFirst();
                     Logger.info("Inserting " + rowCount + " rows...");
-                    dataParser.insertData(sourceConnection, targetConnection, tableName, table_data, tableColumns);
+                    boolean isInserted = dataParser.insertData(sourceConnection, targetConnection, tableName, table_data, tableColumns);
+                    if (!isInserted) {
+                        Logger.info("Continue to next table...");
+                        continue;
+                    }
                 }
 
                 table_data.close();
             }
+
+
+            //hard coded
+            if(wso2_db.equalsIgnoreCase("REG_DB"))
+            {
+                // Re-enable the foreign key constraint
+                String enableConstraintSql = "ALTER TABLE REG_RESOURCE_TAG CHECK CONSTRAINT REG_RESOURCE_TAG_FK_BY_PATH_ID;"
+                        + "ALTER TABLE REG_RESOURCE_PROPERTY CHECK CONSTRAINT REG_RESOURCE_PROPERTY_FK_BY_PATH_ID;";
+                PreparedStatement enableConstraintStatement = targetConnection.prepareStatement(enableConstraintSql);
+                enableConstraintStatement.executeUpdate();
+            }
         } catch (SQLException e) {
             sourceConnection.close();
             targetConnection.close();
-            throw new RuntimeException(e);
+            Logger.error(e.toString());
+            return false;
         }
 
-        //hard coded
-        if(wso2_db.equalsIgnoreCase("REG_DB"))
-        {
-            // Re-enable the foreign key constraint
-            String enableConstraintSql = "ALTER TABLE REG_RESOURCE_TAG CHECK CONSTRAINT REG_RESOURCE_TAG_FK_BY_PATH_ID;"
-                    + "ALTER TABLE REG_RESOURCE_PROPERTY CHECK CONSTRAINT REG_RESOURCE_PROPERTY_FK_BY_PATH_ID;";
-            PreparedStatement enableConstraintStatement = targetConnection.prepareStatement(enableConstraintSql);
-            enableConstraintStatement.executeUpdate();
-        }
 
 
         sourceConnection.close();
         targetConnection.close();
+
+        return true;
     }
 }
