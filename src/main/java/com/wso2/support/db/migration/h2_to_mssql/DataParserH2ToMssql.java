@@ -3,6 +3,7 @@ package com.wso2.support.db.migration.h2_to_mssql;
 import com.wso2.support.db.migration.ColumnInfo;
 import com.wso2.support.db.migration.DataParser;
 import com.wso2.support.db.migration.util.Logger;
+import org.h2.jdbc.JdbcSQLException;
 
 import java.sql.*;
 import java.util.List;
@@ -27,6 +28,7 @@ public class DataParserH2ToMssql extends DataParser {
             int rowCount = 0;
             while (sourceTableResult.next()) {
                 rowCount += 1;
+                boolean isConverted = false;
                 for (int i = 0; i < tableColumns.size(); i++) {
                     ColumnInfo columnInfo = tableColumns.get(i);
                     String columnName = columnInfo.getColumnName();
@@ -34,7 +36,17 @@ public class DataParserH2ToMssql extends DataParser {
 
 //                System.out.println("dataType : " + dataType + ", columnName : " + columnName + ", h2_table_data_result : " + sourceTableResult.getString(columnName));
 
-                    convertData(preparedStatement, sourceTableResult, i + 1, dataType, columnName);
+                    isConverted = convertData(preparedStatement, sourceTableResult, i + 1, dataType, columnName);
+
+                    if(!isConverted)
+                    {
+                        break;
+                    }
+                }
+                if(!isConverted)
+                {
+                    Logger.info("Continue to insert other rows...");
+                    continue;
                 }
 //            System.out.println(preparedStatement);
                 try {
@@ -58,42 +70,52 @@ public class DataParserH2ToMssql extends DataParser {
     }
 
     @Override
-    protected void convertData(PreparedStatement sourcePreparedStatement, ResultSet sourceTableResult, int valueID, int SourceDataType, String columnName) throws SQLException {
-        switch (SourceDataType) {
-            case Types.INTEGER:
-            case Types.SMALLINT:
-            case Types.BIGINT:
+    protected boolean convertData(PreparedStatement sourcePreparedStatement, ResultSet sourceTableResult, int valueID, int SourceDataType, String columnName) {
+        try {
+            switch (SourceDataType) {
+                case Types.INTEGER:
+                case Types.SMALLINT:
 //                System.out.println("value " + valueID + " : " + sourceTableResult.getInt(columnName));
-                sourcePreparedStatement.setInt(valueID, sourceTableResult.getInt(columnName));
-                break;
-            case Types.VARCHAR:
-            case Types.CHAR:
+                    sourcePreparedStatement.setInt(valueID, sourceTableResult.getInt(columnName));
+                    break;
+                case Types.BIGINT:
+//                System.out.println("value " + valueID + " : " + sourceTableResult.getInt(columnName));
+                    sourcePreparedStatement.setLong(valueID, sourceTableResult.getLong(columnName));
+                    break;
+                case Types.VARCHAR:
+                case Types.CHAR:
 //                System.out.println("value " + valueID + " : " + sourceTableResult.getString(columnName));
-                sourcePreparedStatement.setString(valueID, sourceTableResult.getString(columnName));
-                break;
-            case Types.TIMESTAMP:
+                    sourcePreparedStatement.setString(valueID, sourceTableResult.getString(columnName));
+                    break;
+                case Types.TIMESTAMP:
 //                System.out.println("value " + valueID + " : " + sourceTableResult.getTimestamp(columnName));
-                sourcePreparedStatement.setTimestamp(valueID, sourceTableResult.getTimestamp(columnName));
-                break;
-            case Types.BOOLEAN:
-            case Types.TINYINT:
+                    sourcePreparedStatement.setTimestamp(valueID, sourceTableResult.getTimestamp(columnName));
+                    break;
+                case Types.BOOLEAN:
+                case Types.TINYINT:
 //                System.out.println("value " + valueID + " : " + sourceTableResult.getBoolean(columnName));
-                sourcePreparedStatement.setBoolean(valueID, sourceTableResult.getBoolean(columnName));
-                break;
-            case Types.BLOB: // Handle BLOB to VARBINARY conversion
-                Blob blob = sourceTableResult.getBlob(columnName);
-                byte[] bytes = null;
-                if (blob != null) {
-                    bytes = blob.getBytes(1, (int) blob.length());
-                }
-                sourcePreparedStatement.setBytes(valueID, bytes);
-                break;
-            default:
-                Logger.error("Identified unsupported datatype.");
-                throw new SQLException("ERROR: Unsupported data type: " + columnName);
+                    sourcePreparedStatement.setBoolean(valueID, sourceTableResult.getBoolean(columnName));
+                    break;
+                case Types.BLOB: // Handle BLOB to VARBINARY conversion
+                    Blob blob = sourceTableResult.getBlob(columnName);
+                    byte[] bytes = null;
+                    if (blob != null) {
+                        bytes = blob.getBytes(1, (int) blob.length());
+                    }
+                    sourcePreparedStatement.setBytes(valueID, bytes);
+                    break;
+                default:
+                    Logger.error("Identified unsupported datatype.");
+                    throw new SQLException("ERROR: Unsupported data type: " + columnName);
 
+            }
         }
-
+        catch (SQLException e) {
+            Logger.error(e.toString());
+            Logger.error("Error while converting data to target table.");
+            return false;
+        }
+        return true;
     }
 
     private boolean isAutoIncrementColumn_h2(Connection connection, String tableName) throws SQLException {

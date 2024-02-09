@@ -34,5 +34,5 @@ public abstract class DataParser {
         return insertQuery;
     }
 
-    protected abstract void convertData(PreparedStatement sourcePreparedStatement, ResultSet sourceTableResult, int valueID, int SourceDataType, String columnName) throws SQLException;
+    protected abstract boolean convertData(PreparedStatement sourcePreparedStatement, ResultSet sourceTableResult, int valueID, int SourceDataType, String columnName) throws SQLException;
 }
